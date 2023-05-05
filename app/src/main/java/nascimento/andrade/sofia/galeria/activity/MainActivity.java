@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 myItem.title = data.getStringExtra("title");
                 MyItem.description = data.getStringExtra("description");
                 Uri selectedPhotoURI = data.getData();
-                MainActivityViewModel vm = new ViewModelProvider( this ).get(MainActivityViewModel.class );
-                List<MyItem> itens = vm.getItens();
                 try {
                     Bitmap photo = Util.getBitmap( MainActivity.this, selectedPhotoURI, 100, 100 );
                     myItem.photo = photo;
@@ -83,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                MainActivityViewModel vm = new ViewModelProvider( this ).get(MainActivityViewModel.class );
+                List<MyItem> itens = vm.getItens();
 
                 itens.add(myItem);
                 myAdapter.notifyItemInserted(itens.size()-1);
